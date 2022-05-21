@@ -1,9 +1,19 @@
+# Scroller Demo
+# Kevin McAleer May 2022
+
+from time import sleep
+
+# create a message to display
 message = "subs: 6668"
 
+# create a scroller 0bject
 scroll = Scroller()
+
+# set the hue colour (0 is red etc)
 hue = 0
 
-while True:
+
+while True or KeyboardInterrupt:
     for position in range(16,-len(message*(5+1)),-1):
         if hue <=1 or hue == 0:
             hue += 0.01
@@ -13,4 +23,5 @@ while True:
 #         else: scroll.brightness = 1
         scroll.show_message(message, position, hue)
         sleep(0.05)
-#         scroll.clear()
+
+scroll.clear()
