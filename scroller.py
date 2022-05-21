@@ -3,6 +3,7 @@
 from fonts import *
 import picounicorn
 from time import sleep
+import math
 
 picounicorn.init()
 
@@ -15,66 +16,89 @@ class Scroller():
     hue = 1.0
     saturation = 1.0
     brightness = 1.0
+
+    def hsv2rgb(self, hue, sat, val):
+        """ Returns the RGB of Hue Saturation and Brightnes values """
     
-    def hsv_to_rgb(self,h, s, v):
-        if s == 0.0:
-            return v, v, v
-        i = int(h * 6.0)
-        f = (h * 6.0) - i
-        p = v * (1.0 - s)
-        q = v * (1.0 - s * f)
-        t = v * (1.0 - s * (1.0 - f))
-        i = i % 6
-        if i == 0:
-            return int(v), int(t), int(p)
-        if i == 1:
-            return int(q), int(v), int(p)
-        if i == 2:
-            return int(p), int(v), int(t)
-        if i == 3:
-            return int(p), int(q), int(v)
-        if i == 4:
-            return int(t), int(p), int(v)
-        if i == 5:
-            return int(v), int(p), int(q)
+        i = math.floor(hue * 6)
+        f = hue * 6 - i
+        p = val * (1 - sat)
+        q = val * (1 - f * sat)
+        t = val * (1 - (1 - f) * sat)
+
+        r, g, b = [
+            (val, t, p),
+            (q, val, p),
+            (p, val, t),
+            (p, q, val),
+            (t, p, val),
+            (val, p, q),
+        ][int(i % 6)]
+        r = int(r*255)
+        g = int(g*255)
+        b = int(b*255)
+        
+        return r, g, b
+    
+    def rgb2hsv(self, r:int, g:int, b:int):
+        """ Returns the Hue Saturation and Value of RGB values """
+        h = 0
+        s = 0
+        v = 0
+        # constrain the values to the range 0 to 1
+        r_normal, g_normal, b_normal,  = r / 255, g / 255, b / 255
+        cmax = max(r_normal, g_normal, b_normal)
+        cmin = min(r_normal, g_normal, b_normal)
+        delta = cmax - cmin
+        
+        # Hue calculation
+        if(delta ==0):
+            h = 0
+        elif (cmax == r_normal):
+            h = (60 * (((g_normal - b_normal) / delta) % 6))
+        elif (cmax == g_normal):
+            h = (60 * (((b_normal - r_normal) / delta) + 2))
+        elif (cmax == b_normal):
+            h = (60 * (((r_normal - g_normal) / delta) + 4))
+        
+        # Saturation calculation
+        if cmax== 0:
+            s = 0
+        else:
+            s = delta / cmax
+            
+        # Value calculation
+        v = cmax
+
+        return h, s, v 
     
     def clear(self):
         for col in range(16):
             for row in range(7):
                 picounicorn.set_pixel(col, row, 0, 0, 0)
-    
-#     def init_buffer(self, buffer, width, height):
-#         for row in range(0, height):
-#             new_row = []
-#             for col in range(0, width):
-#                 new_row.append('0')
-# #                 print(f'row: {row}, col:{col}')
-#             buffer.append(new_row)
-#         return buffer
-    
+        
     def display_character(self, character,pos):
-#         if self.offset+pos < 16:
-#         print(character)
-        r,g,b = self.hsv_to_rgb(self.hue, self.saturation, self.brightness)
+        r,g,b = self.hsv2rgb(self.hue, self.saturation, self.brightness)
         for row in range(0,5):
             length = len(character[0])
-#             print(length)
+
             for col in range (0,length):
                 x = col+self.offset+pos
                 y = row+1
+                
+                # clear gap
+                if x+1 < 16 and x+1 > -1:
+                    picounicorn.set_pixel(x+1, y, 0, 0, 0)
+                
+                # write pixel
                 if x < 16 and x > -1:
-#                     print(f"row: {row}, col: {col}, x: {x}, y: {y}, char:{character[row][col]}, pos: {pos}, offset: {self.offset}")
                     if character[row][col] == '1':
-#                         r = r * 255
-#                         g = g * 255
-#                         b = b * 255
-#                         print(f'r:{r}, g:{g}, b:{b}')
                         picounicorn.set_pixel(x, y, r, g, b)
                         
                     else:
                         picounicorn.set_pixel(x, y, 0, 0, 0)
+        
         self.offset += len(character[0]) + self.gap
-#         print(self.offset)
        
     
     def show_message(self, message, position, hue:None):
@@ -140,19 +164,58 @@ class Scroller():
                 self.display_character(space, position)
             if character == '1':
                 self.display_character(one, position)
+            if character == '2':
+                self.display_character(two, position)
+            if character == '3':
+                self.display_character(three, position)
+            if character == '4':
+                self.display_character(four, position)
+            if character == '5':
+                self.display_character(five, position)
+            if character == '6':
+                self.display_character(six, position)
+            if character == '7':
+                self.display_character(seven, position)
+            if character == '8':
+                self.display_character(eight, position)
+            if character == '9':
+                self.display_character(nine, position)
+            if character == '0':
+                self.display_character(zero, position)
+            if character == '.':
+                self.display_character(fullstop, position)
+            if character == '@':
+                self.display_character(at, position)
+            if character == '!':
+                self.display_character(exclaimation, position)
+            if character == 'A':
+                self.display_character(A, position)
+            if character == 'B':
+                self.display_character(B, position)
+            if character == 'C':
+                self.display_character(C, position)
+            if character == 'D':
+                self.display_character(D, position)
+            if character == 'E':
+                self.display_character(E, position)
+            if character == 'F':
+                self.display_character(F, position)
                 
         self.offset = 0
     
-message = "abcdefghijklmnopqrstuvwxyz 1"
+message = "subs: 6668"
 
 scroll = Scroller()
 hue = 0
 
 while True:
     for position in range(16,-len(message*(5+1)),-1):
-        if hue <=1:
-            hue += 0.1
-        else: hue == 0
+        if hue <=1 or hue == 0:
+            hue += 0.01
+        else: hue = 0
+#         if scroll.brightness ==1 or scroll.brightness >= 0.1:
+#             scroll.brightness -= 0.1
+#         else: scroll.brightness = 1
         scroll.show_message(message, position, hue)
-        sleep(0.03)
-        scroll.clear()
+        sleep(0.05)
+#         scroll.clear()
