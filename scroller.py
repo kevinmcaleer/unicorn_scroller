@@ -200,22 +200,24 @@ class Scroller():
                 self.display_character(E, position)
             if character == 'F':
                 self.display_character(F, position)
-                
+            if character == 'G':
+                self.display_character(G, position)
+            if character == 'H':
+                self.display_character(H, position)
+            if character == 'I':
+                self.display_character(I, position)
+            if character == 'J':
+                self.display_character(J, position)
+            if character == 'K':
+                self.display_character(K, position)    
+            if character == 'L':
+                self.display_character(L, position)
+            if character == 'M':
+                self.display_character(M, position)
+            if character == 'N':
+                self.display_character(N, position)
+            if character == 'O':
+                self.display_character(O, position)
         self.offset = 0
     
-message = "subs: 6668"
 
-scroll = Scroller()
-hue = 0
-
-while True:
-    for position in range(16,-len(message*(5+1)),-1):
-        if hue <=1 or hue == 0:
-            hue += 0.01
-        else: hue = 0
-#         if scroll.brightness ==1 or scroll.brightness >= 0.1:
-#             scroll.brightness -= 0.1
-#         else: scroll.brightness = 1
-        scroll.show_message(message, position, hue)
-        sleep(0.05)
-#         scroll.clear()
