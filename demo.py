@@ -2,6 +2,7 @@
 # Kevin McAleer May 2022
 
 from time import sleep
+from scroller import Scroller
 
 # create a message to display
 message = "subs: 6668"

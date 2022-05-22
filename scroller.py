@@ -108,6 +108,8 @@ class Scroller():
 #         print(f"message is {message}")
         for character in message:
 #             print(character)
+            if charachter in JONNY_FIVE.characters:
+                self.display_character(JONNY_FIVE.characters.character, position)
             if character == 'a':
                 self.display_character(a, position)
             if character == 'b':
