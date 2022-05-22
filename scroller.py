@@ -100,8 +100,9 @@ class Scroller():
        
     
     def show_message(self, message, position, hue:None):
-        """ Shows the message on the display, at the position provided,
-            using the Hue value specified """
+        """ Shows the message on the display, at the
+            position provided, using the Hue value
+            specified """
         if hue is None:
             hue = 1.0
         self.hue = hue    
@@ -282,6 +283,8 @@ class Scroller():
                 self.display_character(Y, position)
             if character == 'Z':
                 self.display_character(Z, position)
+            if character == '}':
+                self.display_character(smiley, position)
                 
         self.offset = 0
     

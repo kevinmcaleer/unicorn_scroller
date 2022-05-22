@@ -7,12 +7,12 @@ from time import sleep
 
 # create a message to display
 # message = "KEV"
-# message = "kev"
-# message = "Hey Robot Makers!"
-message = "Subscribe!"
-# message = "subs: 6668 "
+message = "kev }"
+# message = "@kevsmac"
+# message = "Subscribe!"
+# message = "subs: 6703"
 # message = "abdefghijklmnopqrstuvwxyz0123456789"
-# message = "?/\<>()~'|.,"
+# message = "? / \ < > ( ) ~ ' | . , "
 
 # create a scroller 0bject
 scroll = Scroller()
@@ -29,10 +29,10 @@ while True or KeyboardInterrupt:
         else: hue = 0
         
         # uncomment the next section to make the brightness pulse
-#         if scroll.brightness ==1 or scroll.brightness >= 0.1:
-#             scroll.brightness -= 0.1
-#         else: scroll.brightness = 1
+        if scroll.brightness ==1 or scroll.brightness >= 0.1:
+            scroll.brightness -= 0.1
+        else: scroll.brightness = 1
         scroll.show_message(message, position, hue)
-        sleep(0.009)
+        sleep(0.09)
 
 scroll.clear()
