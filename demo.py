@@ -6,9 +6,12 @@ from scroller import Scroller
 from time import sleep
 
 # create a message to display
+message = "KEV"
+# message = "kev"
+# message = "Hey Robot Makers!"
 # message = "subs: 6668 "
 # message = "abdefghijklmnopqrstuvwxyz0123456789"
-message = "?/\<>()~'|.,"
+# message = "?/\<>()~'|.,"
 
 # create a scroller 0bject
 scroll = Scroller()
