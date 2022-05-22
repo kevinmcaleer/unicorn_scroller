@@ -158,9 +158,11 @@ class Scroller():
         frame = self.frame
 #         pos = self.position
     
+    
         for row in range(FRAMEBUFFER_HEIGHT):
             for col in range(FRAMEBUFFER_WIDTH):
                 print(f'col:{col}, row:{row}, position{pos}')
+                
                 if col+pos < FRAMEBUFFER_WIDTH+pos and col+pos > 0:
                     if frame.pixel(col,row) == 1:
                         print(f'col: {col},row:{row}, pos:{pos}')
