@@ -9,8 +9,6 @@ picounicorn.init()
 
 class Scroller():
  
-    buffer = None
-    speed = 1
     offset = 0
     gap = 1
     hue = 1.0
@@ -102,12 +100,12 @@ class Scroller():
        
     
     def show_message(self, message, position, hue:None):
+        """ Shows the message on the display, at the position provided,
+            using the Hue value specified """
         if hue is None:
             hue = 1.0
         self.hue = hue    
-#         print(f"message is {message}")
         for character in message:
-#             print(character)
             if character == 'a':
                 self.display_character(a, position)
             if character == 'b':

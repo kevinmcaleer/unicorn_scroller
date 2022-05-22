@@ -8,7 +8,8 @@ from time import sleep
 # create a message to display
 # message = "KEV"
 # message = "kev"
-message = "Hey Robot Makers!"
+# message = "Hey Robot Makers!"
+message = "Subscribe!"
 # message = "subs: 6668 "
 # message = "abdefghijklmnopqrstuvwxyz0123456789"
 # message = "?/\<>()~'|.,"
@@ -32,6 +33,6 @@ while True or KeyboardInterrupt:
 #             scroll.brightness -= 0.1
 #         else: scroll.brightness = 1
         scroll.show_message(message, position, hue)
-#         sleep(0.05)
+        sleep(0.009)
 
 scroll.clear()
