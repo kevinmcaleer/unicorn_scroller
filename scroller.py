@@ -227,7 +227,7 @@ class Scroller():
             if character == '=':
                 self.display_character(equals, position)
             if character == '~':
-                self.display_character(tilda, position)
+                self.display_character(tilde, position)
             if character == "'":
                 self.display_character(single_quote, position)
             if character == '|':
